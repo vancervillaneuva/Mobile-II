@@ -1,8 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
+import Content from './Content';
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
@@ -11,8 +14,8 @@ export default class App extends React.Component {
            onPress={()=>{
             this.props.navigation.navigate('SignIn');
           }} />
-           <Button 
-           title={'Sign UP'} 
+        <Button 
+           title={'Sign Up'} 
            onPress={()=>{
             this.props.navigation.navigate('SignUp');
           }} />
@@ -32,11 +35,10 @@ const styles = StyleSheet.create({
 
 
 const Routes = StackNavigator({
-  Home: { screen: Home },
+  App: { screen: App },
   SignUp: { screen: SignUp},
   SignIn: { screen: SignIn},
   Content: { screen: Content },
-  Async: { screen: Async },
 });
 
-export default Routes;
+export default { Routes, App };

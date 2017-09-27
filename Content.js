@@ -8,21 +8,38 @@ export default class Content extends React.Component {
 constructor(props) {
     super(props);
     this.state = {
-        foods: [{ text: 'Pineapple'}, { text: 'Tomato'}]
+        userNames: [],
     };
 }
 
 
+componentDidMount() {
+    const token = this.props.navigation.state.params.token;
+    axios.get('https://mobile-server-ii.herokuapp.com/user', {
+      headers: {
+        authorization: token,        
+      }
+    }).then((response) => {
+      this.setState({
+        userNames: response.data.todos,
+        userId: response.data._id,
+      });
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+
 static navigationOptions = {
   title: 'Content Page'
 }
+
    render () { 
     return (
       <View>
       <FlatList 
-      data={this.state.foods}
-      renderItems={(( item ))=> {
-       return <Text>(item.text)</Text>
+      data={this.state.userNames}
+      renderItems={( user )=> {
+       return <Text>(user)</Text>
       }}/>
     </View>
       
